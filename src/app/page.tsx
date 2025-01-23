@@ -3,9 +3,6 @@
 import { useEffect, useState } from "react";
 import { debounce, sliceYear } from './utils/helpers';
 import Link from "next/link";
-import Router from "next/router";
-
-// useContext wrapper to carry filmData to filmPage
 
 export default function Home() {
   const [filmData, setFilmData] = useState([]);
@@ -40,8 +37,6 @@ export default function Home() {
     getFilmData();
   }, [searchStr]);
 
-  console.log(filmData[0])
-
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
@@ -70,7 +65,6 @@ export default function Home() {
         ))
         : <p>None found</p>
         }
-       
       </main>
     </div>
   );
