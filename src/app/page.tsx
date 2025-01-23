@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { debounce, sliceYear } from './utils/helpers';
 import Link from "next/link";
+import Router from "next/router";
 
 // useContext wrapper to carry filmData to filmPage
 
@@ -39,13 +40,7 @@ export default function Home() {
     getFilmData();
   }, [searchStr]);
 
-  console.log(filmData[0]
-    // ?.["original_title"]
-  );
-
-
-  console.log('searchValue', searchStr)
-
+  console.log(filmData[0])
 
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
@@ -60,12 +55,16 @@ export default function Home() {
         {filmData && filmData.length > 0 ? (filmData.map((film, i) =>  
         <Link 
           key={i}
-          href={{
-            pathname: `/${film.original_title}`,
+          href={
+            {
+            pathname: "/film_page",
             query: {
-              search: film
+              id: film.id,
+              title: film.original_title,
+              year_released: sliceYear(film.release_date)
             }
-          }}>
+          }
+        }>
           {`${film.original_title}, ${sliceYear(film.release_date)}`}
         </Link>
         ))
